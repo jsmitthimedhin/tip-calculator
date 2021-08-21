@@ -1,0 +1,17 @@
+body {
+    background-color: lightgray;
+}
+
+.container {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: rgb(132, 163, 173);
+    margin-top: 40px;
+    padding: 30px;
+    width: 350px;
+    background-color: lightblue;
+}
+
+h2 {
+    text-align: center;
+}
