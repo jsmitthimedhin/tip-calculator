@@ -1,27 +1,63 @@
-const amount = document.getElementById('amount');
+const amount = document.querySelector('#amount')
+const tip = document.querySelector('#tip')
+const tax = document.querySelector('#tax')
+const switches = document.querySelector('#flexSwitchCheckDefault')
+const switchText = document.querySelector('#switchText')
+
 const percentTip = document.getElementById('percent-tip');
-const total = document.getElementById('total');
+
+const totalAmount = document.querySelector('#total')
+
+
 const form = document.getElementById('form');
 
-function checkNumberRange() {
-    if(amount.value > 0) {
-        if(percentTip.value > 0 && percentTip.value < 101) {
-            return true;
-        }
+const button = document.querySelector('button')
+
+
+switches.addEventListener('click', (e) => {
+    
+    if(!switches.checked){
+        switchText.innerHTML = 'Exclude Tax'    
+        tax.disabled = true
     }
-    return false;
+    else{
+        switchText.innerHTML = 'Include Tax'    
+        tax.disabled = false
+    }
+        
+})
+
+function checkValues(amount, tax, tip) {
+    if(amount > 0 && tax >= 0 && tip >= 0)
+        return true
+    return false
 }
 
-function calculateTip(e) {
+button.addEventListener('click', (e) => {
     e.preventDefault();
-    let totalAmt = amount.value*(percentTip.value/100);
-    if(checkNumberRange()) {
-        total.value = totalAmt;
-    } else {
-        alert("Please input numbers greater than zero only. The tip percentage can only range between 1-100");
+    const amountValue = parseInt(amount.value)
+    const amountTax = parseFloat(tax.value * 0.01).toFixed(2)
+    const tipAmount = parseFloat(tip.value * 0.01).toFixed(2)
+    let total = 0;
+
+    if(!switches.checked && checkValues(amountValue, amountTax, tipAmount)){
+        total = amountValue * tipAmount
+    }else if(switches.checked && checkValues(amountValue, amountTax, tipAmount)){
+        total = ((amountValue + (amountValue * amountTax)) * tipAmount)
     }
-}
+    
+    totalAmount.innerHTML = total.toFixed(2)
+
+    // const amountTax = parseInt(tax.value)
+    // let taxAmount = parseInt((amount.value * (tax.value * 0.01)))
+    // let total = parseInt(amount.value + taxAmount)
+    // totalAmount.innerHTML = parseInt(total)
+
+    
+        
+})
 
 
-form.addEventListener('submit', calculateTip);
+
+
 
