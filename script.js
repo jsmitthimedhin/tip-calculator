@@ -35,7 +35,7 @@ function checkValues(amount, tax, tip) {
 
 button.addEventListener('click', (e) => {
     e.preventDefault();
-    const amountValue = parseInt(amount.value)
+    const amountValue = parseFloat(amount.value).toFixed(2)
     const amountTax = parseFloat(tax.value * 0.01).toFixed(2)
     const tipAmount = parseFloat(tip.value * 0.01).toFixed(2)
     let total = 0;
