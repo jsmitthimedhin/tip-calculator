@@ -1,6 +1,6 @@
 const amount = document.getElementById('amount');
 const percentTip = document.getElementById('percent-tip');
-const total = document.getElementById('total');
+const tipAmount = document.getElementById('tip-amount');
 const form = document.getElementById('form');
 
 function checkNumberRange() {
@@ -14,9 +14,9 @@ function checkNumberRange() {
 
 function calculateTip(e) {
     e.preventDefault();
-    let totalAmt = amount.value*(percentTip.value/100);
+    let calculatedTip = amount.value*(percentTip.value/100);
     if(checkNumberRange()) {
-        total.value = totalAmt;
+        tipAmount.value = calculatedTip;
     } else {
         alert("Please input numbers greater than zero only. The tip percentage can only range between 1-100");
     }
